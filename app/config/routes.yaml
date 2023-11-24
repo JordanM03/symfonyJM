@@ -1,0 +1,50 @@
+app_jeu_accueil:
+    path: '/jeu/accueil'
+    controller: 'App\Controller\LoginController::class'
+    methods: ['GET']
+
+controllers:
+    resource:
+        path: ../src/Controller/
+        namespace: App\Controller
+    type: attribute
+
+guessmots_page:
+    path: /guessmots
+    controller: App\Controller\GuessmotsController::index
+
+classement_page:
+    path: classement
+    controller: App\Controller\ClassementController::index
+
+form_inscription:
+    path: form
+    controller: App\Controller\FormController::index
+
+form_connexion:
+    path: connexion
+    controller: App\Controller\LoginController::index
+
+likes_page:
+    path: like
+    controller: App\Controller\LikeController::index
+
+reglages_user:
+    path: reglages_utilisateur
+    controller: App\Controller\ReglagesUtilisateurController::index
+
+notesmots:
+    path: notesmots
+    controller: App\Controller\NotesmotsController::index
+
+admin_connexion:
+    path: administrateur_connexion
+    controller: App\Controller\AdministrateurConnexionController::index
+
+check_word:
+    path: '/trovaparola/check-word/{id}'
+    controller: 'App\Controller\TrovaparolaController::checkWord'
+
+trovaparola_page:
+    path: trovaparola
+    controller: 'App\Controller\TrovaparolaController::index'

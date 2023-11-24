@@ -1,0 +1,73 @@
+{# templates/guessmots/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg bg-primary shadow p-3 mb-5 rounded">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">JeuJM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link  text-light" aria-current="page" href="{{ path('trovaparola_page') }}">Mes mots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_jeu_accueil') }}">Scores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('classement_page') }}">Classement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('likes_page') }}">Le Top des Mots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('notesmots') }}">B</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ path('reglages_user') }}">Mon compte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <h1 class="text-warning">Choisir un jour</h1>
+    <div class="number-grid">
+        {% for number in 1..30 %}
+            {% if loop.index % 5 == 1 %}
+                <div class="row">
+            {% endif %}
+            
+            <div class="col-md-2">
+                <form method="post" action="{{ path('app_jeu_accueil', {'id': 2}) }}">
+                    <button type="submit" class="btn btn-primary">{{ number }}</button>
+                </form>
+            </div>
+            
+            {% if loop.index % 5 == 0 or loop.last %}
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <br>
+    <hr>
+    <br>
+
+    <h1 class="text-warning text-center">Mot du jour {{ word.getId() }}</h1>
+    <h1 class="text-center">{{ word.getMot() | slice(0, 1) }} ... {{ word.getMot() | slice(-1) }}</h1>
+    <h4 class="text-center">Le mot fait {{ word.getMot() | length}} lettres</h4>
+
+    <p class="text-center">Nombre d'essais restants: {{ app.session.get('essais', 7) }}</p>
+
+    <form method="post" action="{{ path('partie_utilisateur') }}">
+        <label for="propositionUtilisateur">Taper votre choix:</label>
+        <input type="text" id="propositionUtilisateur" name="propositionUtilisateur" required>
+        <button type="submit" class="btn btn-success">Deviner</button>
+    </form>
+
+
+{% endblock %}

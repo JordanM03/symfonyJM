@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <nav class="navbar navbar-expand-lg bg-primary shadow p-3 mb-5 rounded">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">JeuJM</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="{{ path('trovaparola_page') }}">Mes mots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_jeu_accueil') }}">Scores</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="#">Classement</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('likes_page') }}">Le Top des Mots</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('notesmots') }}">Notes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light" href="{{ path('reglages_user') }}">Mon compte</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <br>
+    <h2 class="text-info">{{ utilisateurSession }}, voici le classement général!</h2>
+    <br>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <h3 class="text-warning">Classement</h3>
+                <table class="table table-hover table-warning table-striped table-bordered border-primary border-3 rounded-top">
+                    <thead>
+                        <tr>
+                            <th scope="col">Username</th>
+                            <th scope="col">Prénom</th>
+                            <th scope="col">Score</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for key, utilisateur in utilisateurs %}
+
+                            <tr>
+                                <td>{{ utilisateur.username }}</td>
+                                <td>{{ utilisateur.prenom }}</td>
+                                <td>{{ utilisateur.score }}</td>
+                            </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Notesmots index{% endblock %}
+
+{% block body %}
+    <h1>Notesmots index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mot</th>
+                <th>Notes</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for notesmot in notesmots %}
+            <tr>
+                <td>{{ notesmot.id }}</td>
+                <td>{{ notesmot.mot }}</td>
+                <td>{{ notesmot.notes }}</td>
+                <td>
+                    <a href="{{ path('app_notess_mots_show', {'id': notesmot.id}) }}">show</a>
+                    <a href="{{ path('app_notess_mots_edit', {'id': notesmot.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_notess_mots_new') }}">Create new</a>
+{% endblock %}
